@@ -3,34 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurateur Sécurité</title>
+    <title>Configurateur Sécurité Domotique</title>
     <style>
-        :root { --primary: #1e3a8a; --bg: #f8fafc; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
-        .card { background: white; padding: 25px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 400px; border: 1px solid #e2e8f0; }
-        h2 { text-align: center; color: #1e293b; margin-top: 0; font-size: 1.3rem; cursor: pointer; user-select: none; }
-        .product-preview { width: 100%; height: 250px; background: #fff; border-radius: 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .product-preview img { width: 100%; height: 100%; object-fit: contain; }
-        label { display: block; margin: 12px 0 5px; font-weight: 600; color: #64748b; font-size: 0.8rem; text-transform: uppercase; }
-        select { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 1rem; background-color: #fff; color: #1e293b; margin-bottom: 5px; outline: none; -webkit-appearance: none; }
+        :root { 
+            --primary: #1e3a8a; 
+            --bg: #f8fafc; 
+            --accent: #2563eb;
+        }
         
-        .specs { margin-top: 20px; font-size: 0.8rem; color: #475569; background: #f8fafc; padding: 12px; border-radius: 15px; border: 1px solid #e2e8f0; line-height: 1.4; }
-        .specs b { color: #1e293b; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.7rem; }
-        .warning { font-size: 0.75rem; color: #64748b; margin-top: 5px; font-style: italic; border-top: 1px solid #eee; padding-top: 5px; }
+        body { 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            background-color: var(--bg); 
+            margin: 0; 
+            padding: 15px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            min-height: 100vh;
+        }
 
-        .btn-reset { display: block; width: 100%; background: none; border: none; color: #94a3b8; font-size: 0.7rem; text-decoration: underline; cursor: pointer; margin-top: 15px; text-align: center; }
+        .card { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 30px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+            width: 100%; 
+            max-width: 400px; 
+            border: 1px solid #e2e8f0; 
+        }
 
-        .result-box { margin-top: 5px; padding: 20px; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); border-radius: 20px; text-align: center; color: white; box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2); cursor: pointer; user-select: none; }
-        .price-label { font-size: 0.8rem; opacity: 0.9; font-weight: 600; }
-        .price-value { font-size: 2.5rem; font-weight: 800; margin: 5px 0; }
-        .discount-badge { font-size: 0.7rem; background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 5px; margin-left: 5px; vertical-align: middle; }
+        h2 { 
+            text-align: center; 
+            color: #1e293b; 
+            margin-top: 0; 
+            font-size: 1.3rem; 
+            cursor: pointer; 
+            user-select: none; 
+        }
+
+        .product-preview { 
+            width: 100%; 
+            height: 250px; 
+            background: #fff; 
+            border-radius: 20px; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden; 
+        }
+
+        .product-preview img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+        }
+
+        label { 
+            display: block; 
+            margin: 12px 0 5px; 
+            font-weight: 600; 
+            color: #64748b; 
+            font-size: 0.8rem; 
+            text-transform: uppercase; 
+        }
+
+        select { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 12px; 
+            font-size: 1rem; 
+            background-color: #fff; 
+            color: #1e293b; 
+            margin-bottom: 5px; 
+            outline: none; 
+            -webkit-appearance: none; 
+        }
         
-        .gain-secret { margin-top: 15px; color: #cbd5e1; font-size: 0.65rem; text-align: center; width: 100%; font-family: monospace; }
+        .specs { 
+            margin-top: 20px; 
+            font-size: 0.8rem; 
+            color: #475569; 
+            background: #f8fafc; 
+            padding: 12px; 
+            border-radius: 15px; 
+            border: 1px solid #e2e8f0; 
+            line-height: 1.4; 
+        }
+
+        .specs b { 
+            color: #1e293b; 
+            display: block; 
+            margin-bottom: 5px; 
+            text-transform: uppercase; 
+            font-size: 0.7rem; 
+        }
+
+        .warning { 
+            font-size: 0.75rem; 
+            color: #64748b; 
+            margin-top: 5px; 
+            font-style: italic; 
+            border-top: 1px solid #eee; 
+            padding-top: 5px; 
+        }
+
+        .btn-reset { 
+            display: block; 
+            width: 100%; 
+            background: none; 
+            border: none; 
+            color: #94a3b8; 
+            font-size: 0.7rem; 
+            text-decoration: underline; 
+            cursor: pointer; 
+            margin-top: 15px; 
+            text-align: center; 
+        }
+
+        .result-box { 
+            margin-top: 5px; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); 
+            border-radius: 20px; 
+            text-align: center; 
+            color: white; 
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2); 
+            cursor: pointer; 
+            user-select: none; 
+        }
+
+        .price-label { 
+            font-size: 0.8rem; 
+            opacity: 0.9; 
+            font-weight: 600; 
+        }
+
+        .price-value { 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            margin: 5px 0; 
+        }
+
+        .discount-badge { 
+            font-size: 0.7rem; 
+            background: rgba(255,255,255,0.2); 
+            padding: 2px 6px; 
+            border-radius: 5px; 
+            margin-left: 5px; 
+            vertical-align: middle; 
+        }
+        
+        .gain-secret { 
+            margin-top: 15px; 
+            color: #cbd5e1; 
+            font-size: 0.65rem; 
+            text-align: center; 
+            width: 100%; 
+            font-family: monospace; 
+        }
     </style>
 </head>
 <body>
 
 <div class="card">
+    <!-- Cliquer sur le titre pour basculer Mode Pro / Mode Ami -->
     <h2 id="title" onclick="toggleMode()">🛡️ Pack Sécurité</h2>
 
     <div class="product-preview">
@@ -44,7 +182,8 @@
         <option value="sirene">Sirène Alarme 110dB</option>
     </select>
 
-    <label id="label-qty">Nombre de détecteurs d'ouverture</label>
+    <!-- LIBELLÉ FIXE -->
+    <label>Nombre de détecteurs d'ouverture</label>
     <select id="quantite" onchange="updateUI()">
         <option value="1">1 unité</option>
         <option value="2">2 unités</option>
@@ -70,12 +209,13 @@
         🔔 Alertes smartphone 24h/7j<br>
         🛡️ Mode Armement automatique
         <div class="warning">
-            ⚠️ Wifi 2,4GHz nécessaire. Sous réserve de faisabilité (portée Zigbee).
+            ⚠️ Wifi 2,4GHz nécessaire. Portée Zigbee optimisée par nos soins.
         </div>
     </div>
 
     <button class="btn-reset" onclick="resetAll()">Réinitialiser le pack</button>
 
+    <!-- Cliquer sur le prix pour appliquer -10%, -20%, -30% (Mode Pro uniquement) -->
     <div class="result-box" onclick="applyDiscount()">
         <div class="price-label">
             <span id="price-desc">Forfait installation</span>
@@ -128,36 +268,37 @@
         const mod = document.getElementById('modele').value;
         const qty = parseInt(document.getElementById('quantite').value);
         const img = document.getElementById('product-img');
-        const lbl = document.getElementById('label-qty');
         
+        // Mise à jour de l'image
         img.src = mod + '.jpg';
 
-        if (mod === 'camera') lbl.innerText = "Nombre de caméras";
-        else if (mod === 'detecteur') lbl.innerText = "Nombre de détecteurs d'ouverture";
-        else if (mod === 'sirene') lbl.innerText = "Nombre de sirènes";
-
-        // COUTS D'ACHAT
-        let achatU = 8; // Défaut détecteur
+        // Logique de prix Achat
+        let achatU = 8; // Détecteur
         if (mod === 'camera') achatU = 20;
         else if (mod === 'sirene') achatU = 15;
 
-        // PRIX DE VENTE (On aligne tout à 89€ en Pro par défaut)
+        // Prix de vente de base
         let venteU = (currentMode === 'pro') ? 89 : 45;
 
-        // Dégressif auto si grosse quantité
-        if (qty >= 5) venteU = venteU * 0.85; 
+        // Dégressif automatique -15% si 5 unités ou plus (Mode Pro)
+        if (currentMode === 'pro' && qty >= 5) {
+            venteU = venteU * 0.85;
+        }
 
-        // Application remise manuelle cliquée
-        if (currentMode === 'pro') venteU = venteU * (1 - discountLevel);
+        // Application de la remise manuelle (clic sur prix bleu)
+        if (currentMode === 'pro') {
+            venteU = venteU * (1 - discountLevel);
+        }
 
         const totalVente = qty * venteU;
-        // On retire l'achat du matériel et 10€ de passerelle Zigbee
+        // Calcul du gain : Vente Totale - (Achat unitaire * quantité) - 10€ de passerelle
         const totalGain = totalVente - (qty * achatU) - 10;
 
         document.getElementById('total-v').innerText = totalVente.toFixed(2).replace('.', ',') + "€";
         document.getElementById('gain-v').innerText = "Ref: " + totalGain.toFixed(2).replace('.', ',');
     }
 
+    // Lancer au chargement
     window.onload = updateUI;
 </script>
 
